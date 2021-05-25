@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <ListView Margin="10" Name="ProcessInfo">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Header="id" Width="50" DisplayMemberBinding="{Binding id}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
