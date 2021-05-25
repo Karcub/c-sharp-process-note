@@ -20,7 +20,7 @@ namespace c_sharp_process_note
             processes = Process.GetProcesses();
             foreach (Process item in processes)
             {
-                processlist.Add(new ListedProcess() { id = item.Id, name = item.ProcessName });
+                processlist.Add(new ListedProcess() { PID = item.Id, Name = item.ProcessName });
                 
             }
             ProcessInfo.ItemsSource = processlist;
@@ -61,18 +61,14 @@ namespace c_sharp_process_note
             {
                 DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
                 ListedProcess process = dgr.Item as ListedProcess;
-                Process.Start("http://google.com/search?q="+process.name);
-            }
-            else
-            {
-                Process.Start("https://github.com/CodecoolGlobal/c-sharp-process-note-c-_processnote");
+                Process.Start("http://google.com/search?q="+process.Name);
             }
         }
     }
     public class ListedProcess
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int PID { get; set; }
+        public string Name { get; set; }
         
         public List<string> Comments = new List<string>();
     }

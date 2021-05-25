@@ -36,18 +36,14 @@
         <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
             <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dataGrid_selectedRow" CanUserResizeColumns="False" Margin="0,0,0,10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
-                    <DataGridTextColumn Header="id" Binding="{Binding id}" Width="245"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="id" Binding="{Binding PID}" Width="245"/>
                 </DataGrid.Columns>
             </DataGrid>
 
         </Grid>
 
         <Grid Margin="0,0,0,77.2" Width="338">
-            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="191,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="CPU Usage" HorizontalAlignment="Left" Height="25" Margin="60,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="191,80,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="60,80,0,0" VerticalAlignment="Top" Width="100"/>
             <Button Margin="130,192,124,-85" Content="Add &#10;comment" Click="AddComment_Click"/>
             <Button Margin="219,192,37,-85" Content="Search &#10;online" Click="Search_Click"/>
         </Grid>
