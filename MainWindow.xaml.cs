@@ -19,7 +19,7 @@ namespace c_sharp_process_note
             Process[] processes = Process.GetProcesses();
             foreach (Process item in processes)
             {
-                ListedProcesses.Add(new ListedProcess() { Pid = item.Id, Name = item.ProcessName });
+                ListedProcesses.Add(new ListedProcess() { id = item.Id, Name = item.ProcessName });
             }
             ProcessInfo.ItemsSource = ListedProcesses;
         }
@@ -65,7 +65,7 @@ namespace c_sharp_process_note
     }
     public class ListedProcess
     {
-        public int Pid { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
         
         public readonly List<string> Comments = new List<string>();
