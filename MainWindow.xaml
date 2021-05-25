@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:c_sharp_process_note"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="The best Process Note ever" Height="700" Width="800">
     <!-- <Grid> -->
     <!--     <ListView Margin="10" Name="ProcessInfo"> -->
     <!--         <ListView.View> -->
@@ -17,16 +17,16 @@
     <!--     </ListView> -->
     <!-- </Grid> -->
     
-    <DockPanel HorizontalAlignment="Left" Height="416" LastChildFill="False" Margin="66,39,0,0" VerticalAlignment="Top" Width="660">
+    <DockPanel HorizontalAlignment="Left" Height="616" LastChildFill="False" Margin="66,39,0,0" VerticalAlignment="Top" Width="660">
 
         <Grid DockPanel.Dock="Bottom" Height="189" Margin="321,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ListView Name ="commentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="339" Margin="0,23,0,0">
+            <ListView Name ="CommentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="339" Margin="0,23,0,0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Comments" Width="339"/>
+                        <GridViewColumn Header="Comments on the process" Width="339"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -34,18 +34,22 @@
 
         </Grid>
         <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
-            <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dataGrid_selectedRow" CanUserResizeColumns="False" Margin="0,0,0,10">
+            <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="Select_Row" CanUserResizeColumns="False" Margin="0,0,0,10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="id" Binding="{Binding PID}" Width="245"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="180"/>
+                    <DataGridTextColumn Header="PID" Binding="{Binding id}"  Width="115"/>
                 </DataGrid.Columns>
             </DataGrid>
 
         </Grid>
 
         <Grid Margin="0,0,0,77.2" Width="338">
-            <Button Margin="130,192,124,-85" Content="Add &#10;comment" Click="AddComment_Click"/>
-            <Button Margin="219,192,37,-85" Content="Search &#10;online" Click="Search_Click"/>
+            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="191,10,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="CPU Usage" HorizontalAlignment="Left" Height="25" Margin="60,10,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="191,80,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="60,80,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button Margin="10,392,170,-85" Content="Add &#10;comment" Click="Add_Comment"/>
+            <Button Margin="180,392,10,-85" Content="Search &#10;online" Click="Search"/>
         </Grid>
 
 
