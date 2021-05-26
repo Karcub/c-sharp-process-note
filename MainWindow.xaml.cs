@@ -80,14 +80,16 @@ namespace c_sharp_process_note
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Current process is not running");
+                        //MessageBox.Show("Current process is not running");
+                        continue;
                     } 
                 }
             }
         }
         private void printCpuUsage(Process process1)
         {
-            CPU_usage_label.Content = Process.GetProcessById(process1.Id).Id;
+            
+            CPU_usage_label.Content = "1%";
         }
         private void printRunTime(Process process1)
         {
@@ -99,7 +101,8 @@ namespace c_sharp_process_note
         }
         private void printStartTime(Process process1)
         {
-            Start_time_label.Content = Process.GetProcessById(process1.Id).Id;
+            
+            Start_time_label.Content = process1.StartTime.ToString("f");
         }
     }
 

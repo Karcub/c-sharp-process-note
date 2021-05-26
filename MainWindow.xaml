@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="The best Process Note ever" Height="710" Width="830">
-    
+
     <DockPanel HorizontalAlignment="Left" LastChildFill="False" Height="616" Margin="66,39,0,0" VerticalAlignment="Top" Width="680">
 
         <Grid DockPanel.Dock="Bottom" Height="189" Margin="321,0,0,0">
@@ -19,7 +19,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            
+
         </Grid>
         <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
             <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="Select_Row" CanUserResizeColumns="False" Margin="0,0,0,10">
@@ -31,7 +31,7 @@
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseEnter" Handler="DataGridRow_MouseEnter"/>
                     </Style>
-                    </DataGrid.ItemContainerStyle>
+                </DataGrid.ItemContainerStyle>
             </DataGrid>
 
         </Grid>
@@ -45,7 +45,7 @@
             <Button Margin="180,400,10,-85" Content="Search online" Click="Search"/>
             <Label x:Name="CPU_usage_label" Content="Label" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top"/>
             <Label x:Name="Memory_usage_label" Content="Label" HorizontalAlignment="Left" Margin="58,243,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Start_time_label" Content="Label" HorizontalAlignment="Left" Margin="200,243,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="158,243,0,0" VerticalAlignment="Top" Width="180"/>
             <Label x:Name="Run_time_label" Content="Label" HorizontalAlignment="Left" Margin="200,57,0,0" VerticalAlignment="Top"/>
         </Grid>
 
