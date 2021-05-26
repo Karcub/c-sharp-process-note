@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using ProcessNote;
@@ -89,7 +90,7 @@ namespace c_sharp_process_note
         private void printCpuUsage(Process process1)
         {
             
-            CPU_usage_label.Content = "1%";
+            Process_name_label.Content = process1.ProcessName;
         }
         private void printRunTime(Process process1)
         {
@@ -97,7 +98,7 @@ namespace c_sharp_process_note
         }
         private void printMemoryUsage(Process process1)
         {
-            Memory_usage_label.Content = Process.GetProcessById(process1.Id).Id;
+            Memory_usage_label.Content = process1.PeakWorkingSet64/2048 +" mb";
         }
         private void printStartTime(Process process1)
         {

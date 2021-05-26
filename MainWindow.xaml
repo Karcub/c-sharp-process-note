@@ -38,15 +38,15 @@
 
         <Grid Margin="0,0,0,77.2" Width="338">
             <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="200,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="CPU Usage" HorizontalAlignment="Left" Height="25" Margin="50,10,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="Process name" HorizontalAlignment="Left" Height="25" Margin="50,10,0,0" VerticalAlignment="Top" Width="90"/>
             <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="200,200,0,0" VerticalAlignment="Top" Width="90"/>
             <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="50,200,0,0" VerticalAlignment="Top" Width="100"/>
             <Button Margin="10,400,170,-85" Content="Add comment" Click="Add_Comment"/>
             <Button Margin="180,400,10,-85" Content="Search online" Click="Search"/>
-            <Label x:Name="CPU_usage_label" Content="Label" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Memory_usage_label" Content="Label" HorizontalAlignment="Left" Margin="58,243,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Process_name_label" Content="" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="58,243,0,0" VerticalAlignment="Top"/>
             <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="158,243,0,0" VerticalAlignment="Top" Width="180"/>
-            <Label x:Name="Run_time_label" Content="Label" HorizontalAlignment="Left" Margin="200,57,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Run_time_label" Content="" HorizontalAlignment="Left" Margin="200,57,0,0" VerticalAlignment="Top"/>
         </Grid>
 
 
