@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,57 +7,58 @@ using ProcessNote;
 
 namespace c_sharp_process_note
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        public Process[] processes;
-        List<ListedProcess> processlist = new List<ListedProcess>();
+        public readonly List<ListedProcess> ListedProcesses = new List<ListedProcess>();
+        public Process[] processes = Process.GetProcesses();
 
         public MainWindow()
         {
             InitializeComponent();
-            processes = Process.GetProcesses();
+            Process[] processes = Process.GetProcesses();
             foreach (Process item in processes)
             {
-                processlist.Add(new ListedProcess() { id = item.Id, name = item.ProcessName });
+                ListedProcesses.Add(new ListedProcess() { id = item.Id, Name = item.ProcessName });
             }
-            ProcessInfo.ItemsSource = processlist;
-
+            ProcessInfo.ItemsSource = ListedProcesses;
         }
-
-        private void refreshData()
+        
+        private void Select_Row(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender != null)
+            {
+                DataGrid grid = sender as DataGrid;
+                Refresh_Select();
+            }
+        }
+        
+        private void Refresh_Select()
         {
             if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
             {
                 DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess process = dgr.Item as ListedProcess;
-
-                commentsList.ItemsSource = process.Comments;
+                ListedProcess selectedProcess = dgr.Item as ListedProcess;
+                
+                CommentsList.ItemsSource = selectedProcess.Comments;
             }
         }
 
-        private void AddComment_Click(object sender, RoutedEventArgs e)
+        private void Add_Comment(object sender, RoutedEventArgs e)
         {
             if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
             {
-                var dialog = new commentsDialog();
-                dialog.ShowDialog();
+                var commentsDialog = new CommentsDialog();
+                commentsDialog.ShowDialog();
             }
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+        private void Search(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
+            if (ProcessInfo.SelectedItems.Count == 1)
             {
                 DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess process = dgr.Item as ListedProcess;
-                Process.Start("http://google.com/search?q=" + process.name);
-            }
-            else
-            {
-                Process.Start("https://github.com/CodecoolGlobal/c-sharp-process-note-c-_processnote");
+                ListedProcess selectedProcess = dgr.Item as ListedProcess;
+                Process.Start("http://google.com/search?q=" + selectedProcess.Name);
             }
         }
 
@@ -69,12 +71,16 @@ namespace c_sharp_process_note
             {
                 if (process1.Id.Equals(ls.id))
                 {
-                    if (process1!=null)
+                    try
                     {
                         printCpuUsage(process1);
                         printRunTime(process1);
                         printMemoryUsage(process1);
                         printStartTime(process1);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Current process is not running");
                     } 
                 }
             }
@@ -100,14 +106,9 @@ namespace c_sharp_process_note
     public class ListedProcess
     {
         public int id { get; set; }
-        public string name { get; set; }
-        /*public string CPUUsage { get; set; }
-        public string MemoryUsage { get; set; }
-        public string RunningTime { get; set; }
-        public string StartTime { get; set; }*/
-
-        public List<string> Comments = new List<string>();
-
+        public string Name { get; set; }
+        
+        public readonly List<string> Comments = new List<string>();
     }
 }
     

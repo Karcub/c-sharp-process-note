@@ -19,32 +19,32 @@ namespace ProcessNote
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class commentsDialog : Window
+    public partial class CommentsDialog : Window
     {
-        public commentsDialog()
+        public CommentsDialog()
         {
             InitializeComponent();
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs e)
         {
 
-            var window2 = Application.Current.Windows
+            var mainWindow = Application.Current.Windows
                 .Cast<Window>()
                 .FirstOrDefault(window => window is MainWindow) as MainWindow;
 
-            DataGridRow dgr = window2.ProcessInfo.ItemContainerGenerator.ContainerFromItem(window2.ProcessInfo.SelectedItem) as DataGridRow;
-            ListedProcess process = dgr.Item as ListedProcess;
+            DataGridRow dgr = mainWindow.ProcessInfo.ItemContainerGenerator.ContainerFromItem(mainWindow.ProcessInfo.SelectedItem) as DataGridRow;
+            ListedProcess SelectedProcess = dgr.Item as ListedProcess;
 
-            process.Comments.Add(commentsBox.Text);
-            window2.commentsList.ItemsSource = " ";
-            window2.commentsList.ItemsSource = process.Comments;
+            SelectedProcess.Comments.Add(CommentsBox.Text);
+            mainWindow.CommentsList.ItemsSource = " ";
+            mainWindow.CommentsList.ItemsSource = SelectedProcess.Comments;
             this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
