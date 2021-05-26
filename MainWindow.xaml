@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:c_sharp_process_note"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="490.72" Width="753.03">
     <!-- <Grid> -->
     <!--     <ListView Margin="10" Name="ProcessInfo"> -->
     <!--         <ListView.View> -->
@@ -16,7 +16,7 @@
     <!--         </ListView.View> -->
     <!--     </ListView> -->
     <!-- </Grid> -->
-    
+
     <DockPanel HorizontalAlignment="Left" Height="416" LastChildFill="False" Margin="66,39,0,0" VerticalAlignment="Top" Width="660">
 
         <Grid DockPanel.Dock="Bottom" Height="189" Margin="321,0,0,0">
@@ -34,11 +34,16 @@
 
         </Grid>
         <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
-            <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dataGrid_selectedRow" CanUserResizeColumns="False" Margin="0,0,0,10">
+            <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="False" Margin="0,0,0,10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
-                    <DataGridTextColumn Header="id" Binding="{Binding id}" Width="245"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="200"/>
+                    <DataGridTextColumn Header="id" Binding="{Binding id}"/>
                 </DataGrid.Columns>
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseEnter" Handler="DataGridRow_MouseEnter"/>
+                    </Style>
+                    </DataGrid.ItemContainerStyle>
             </DataGrid>
 
         </Grid>
@@ -50,9 +55,13 @@
             <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="60,80,0,0" VerticalAlignment="Top" Width="100"/>
             <Button Margin="130,192,124,-85" Content="Add &#10;comment" Click="AddComment_Click"/>
             <Button Margin="219,192,37,-85" Content="Search &#10;online" Click="Search_Click"/>
+            <Label x:Name="CPU_usage_label" Content="Label" HorizontalAlignment="Left" Margin="60,35,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Run_time_label" Content="Label" HorizontalAlignment="Left" Margin="191,35,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Memory_usage_label" Content="Label" HorizontalAlignment="Left" Margin="68,105,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Start_time_label" Content="Label" HorizontalAlignment="Left" Margin="199,105,0,0" VerticalAlignment="Top"/>
         </Grid>
 
 
     </DockPanel>
-    
+
 </Window>

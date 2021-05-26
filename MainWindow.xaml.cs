@@ -13,7 +13,7 @@ namespace c_sharp_process_note
     {
         public Process[] processes;
         List<ListedProcess> processlist = new List<ListedProcess>();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,27 +21,18 @@ namespace c_sharp_process_note
             foreach (Process item in processes)
             {
                 processlist.Add(new ListedProcess() { id = item.Id, name = item.ProcessName });
-                
             }
             ProcessInfo.ItemsSource = processlist;
+
         }
-        
-        private void dataGrid_selectedRow(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender != null)
-            {
-                DataGrid grid = sender as DataGrid;
-                refreshData();
-            }
-        }
-        
+
         private void refreshData()
         {
             if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
             {
                 DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
                 ListedProcess process = dgr.Item as ListedProcess;
-                
+
                 commentsList.ItemsSource = process.Comments;
             }
         }
@@ -61,19 +52,62 @@ namespace c_sharp_process_note
             {
                 DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
                 ListedProcess process = dgr.Item as ListedProcess;
-                Process.Start("http://google.com/search?q="+process.name);
+                Process.Start("http://google.com/search?q=" + process.name);
             }
             else
             {
                 Process.Start("https://github.com/CodecoolGlobal/c-sharp-process-note-c-_processnote");
             }
         }
+
+        private void DataGridRow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DataGridRow row = (DataGridRow)sender;
+            ListedProcess ls = (ListedProcess)row.Item;
+     
+            foreach(Process process1 in processes)
+            {
+                if (process1.Id.Equals(ls.id))
+                {
+                    if (process1!=null)
+                    {
+                        printCpuUsage(process1);
+                        printRunTime(process1);
+                        printMemoryUsage(process1);
+                        printStartTime(process1);
+                    } 
+                }
+            }
+        }
+        private void printCpuUsage(Process process1)
+        {
+            CPU_usage_label.Content = Process.GetProcessById(process1.Id).Id;
+        }
+        private void printRunTime(Process process1)
+        {
+            Run_time_label.Content = Process.GetProcessById(process1.Id).Id;
+        }
+        private void printMemoryUsage(Process process1)
+        {
+            Memory_usage_label.Content = Process.GetProcessById(process1.Id).Id;
+        }
+        private void printStartTime(Process process1)
+        {
+            Start_time_label.Content = Process.GetProcessById(process1.Id).Id;
+        }
     }
+
     public class ListedProcess
     {
         public int id { get; set; }
         public string name { get; set; }
-        
+        /*public string CPUUsage { get; set; }
+        public string MemoryUsage { get; set; }
+        public string RunningTime { get; set; }
+        public string StartTime { get; set; }*/
+
         public List<string> Comments = new List<string>();
+
     }
 }
+    
