@@ -3,35 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:c_sharp_process_note"
         mc:Ignorable="d"
-        Title="The best Process Note ever" Height="700" Width="800">
-    <!-- <Grid> -->
-    <!--     <ListView Margin="10" Name="ProcessInfo"> -->
-    <!--         <ListView.View> -->
-    <!--             <GridView> -->
-    <!--                 <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding name}" /> -->
-    <!--                 <GridViewColumn Header="id" Width="50" DisplayMemberBinding="{Binding id}" /> -->
-    <!--             </GridView> -->
-    <!--         </ListView.View> -->
-    <!--     </ListView> -->
-    <!-- </Grid> -->
+        Title="The best Process Note ever" Height="710" Width="830">
     
-    <DockPanel HorizontalAlignment="Left" Height="616" LastChildFill="False" Margin="66,39,0,0" VerticalAlignment="Top" Width="660">
+    <DockPanel HorizontalAlignment="Left" LastChildFill="False" Height="616" Margin="66,39,0,0" VerticalAlignment="Top" Width="680">
 
         <Grid DockPanel.Dock="Bottom" Height="189" Margin="321,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ListView Name ="CommentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="339" Margin="0,23,0,0">
+            <ListView Name ="CommentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="330" Margin="10,23,0,0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Comments on the process" Width="339"/>
+                        <GridViewColumn Header="Comments on the process" Width="310"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-
-
+            
         </Grid>
         <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
             <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="Select_Row" CanUserResizeColumns="False" Margin="0,0,0,10">
@@ -44,12 +32,12 @@
         </Grid>
 
         <Grid Margin="0,0,0,77.2" Width="338">
-            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="191,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="CPU Usage" HorizontalAlignment="Left" Height="25" Margin="60,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="191,80,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="60,80,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button Margin="10,392,170,-85" Content="Add &#10;comment" Click="Add_Comment"/>
-            <Button Margin="180,392,10,-85" Content="Search &#10;online" Click="Search"/>
+            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="200,10,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="CPU Usage" HorizontalAlignment="Left" Height="25" Margin="50,10,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="200,200,0,0" VerticalAlignment="Top" Width="90"/>
+            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="50,200,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button Margin="10,400,170,-85" Content="Add comment" Click="Add_Comment"/>
+            <Button Margin="180,400,10,-85" Content="Search online" Click="Search"/>
         </Grid>
 
 

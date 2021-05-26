@@ -36,9 +36,10 @@ namespace ProcessNote
             DataGridRow dgr = mainWindow.ProcessInfo.ItemContainerGenerator.ContainerFromItem(mainWindow.ProcessInfo.SelectedItem) as DataGridRow;
             ListedProcess SelectedProcess = dgr.Item as ListedProcess;
 
-            SelectedProcess.Comments.Add(commentsBox.Text);
+            SelectedProcess.Comments.Add(CommentsBox.Text);
+            mainWindow.CommentsList.ItemsSource = " ";
             mainWindow.CommentsList.ItemsSource = SelectedProcess.Comments;
-            Close();
+            this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

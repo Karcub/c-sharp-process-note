@@ -6,9 +6,6 @@ using ProcessNote;
 
 namespace c_sharp_process_note
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
         public readonly List<ListedProcess> ListedProcesses = new List<ListedProcess>();
@@ -46,7 +43,7 @@ namespace c_sharp_process_note
 
         private void Add_Comment(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems.Count == 1)
+            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
             {
                 var commentsDialog = new CommentsDialog();
                 commentsDialog.ShowDialog();
