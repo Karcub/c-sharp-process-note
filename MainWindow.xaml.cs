@@ -93,7 +93,7 @@ namespace c_sharp_process_note
         }
         private void printRunTime(Process process1)
         {
-            Run_time_label.Content = Process.GetProcessById(process1.Id).Id;
+            Run_time_label.Content = process1.TotalProcessorTime;
         }
         private void printMemoryUsage(Process process1)
         {
