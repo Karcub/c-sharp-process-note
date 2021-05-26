@@ -47,6 +47,7 @@
             <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="58,243,0,0" VerticalAlignment="Top"/>
             <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="158,243,0,0" VerticalAlignment="Top" Width="180"/>
             <Label x:Name="Run_time_label" Content="" HorizontalAlignment="Left" Margin="200,57,0,0" VerticalAlignment="Top"/>
+            <Button Content="Show Threeds" HorizontalAlignment="Left" Margin="50,139,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click"/>
         </Grid>
 
 
