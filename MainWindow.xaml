@@ -121,6 +121,7 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Button Content="Show Threeds" HorizontalAlignment="Left" Margin="50,139,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click"/>
             <Label x:Name="Process_name_label" Content="" HorizontalAlignment="Left" Margin="38,85,0,0" VerticalAlignment="Top" Width="124" BorderBrush="Black" Height="67"/>
             <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="38,250,0,0" VerticalAlignment="Top" Width="124"/>
             <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="138"/>

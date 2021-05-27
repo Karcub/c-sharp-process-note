@@ -14,6 +14,7 @@ namespace c_sharp_process_note
     {
         public readonly List<ListedProcess> ListedProcesses = new List<ListedProcess>();
         public readonly Process[] Processes = Process.GetProcesses();
+        public HashSet<ProcessThread> processThreads = new HashSet<ProcessThread>();
 
         public MainWindow()
         {
@@ -62,6 +63,8 @@ namespace c_sharp_process_note
                         printRunTime(process1);
                         printMemoryUsage(process1);
                         printStartTime(process1);
+                        processThreads = new HashSet<ProcessThread>();
+                        sendThreads(process1);
                     }
                     catch (Exception)
                     {
@@ -71,9 +74,15 @@ namespace c_sharp_process_note
                 }
             }
         }
+        private void sendThreads(Process process1)
+        {
+            foreach(ProcessThread processThread in process1.Threads)
+            {
+                processThreads.Add(processThread);
+            }
+        }
         private void printCpuUsage(Process process1)
         {
-            
             Process_name_label.Content = process1.ProcessName;
         }
         private void printRunTime(Process process1)
@@ -110,6 +119,17 @@ namespace c_sharp_process_note
         private void CommentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string threads = "";
+            foreach(ProcessThread thread in processThreads)
+            {
+                threads += "Thread id: "+thread.Id+"\t state: "+thread.ThreadState+"\n";
+            }
+            MessageBox.Show(threads);
+            
         }
     }
 
