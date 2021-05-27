@@ -51,20 +51,20 @@ namespace c_sharp_process_note
         private void DataGridRow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseEventArgs e)
         {
             DataGridRow row = (DataGridRow)sender;
-            ListedProcess ls = (ListedProcess)row.Item;
+            ListedProcess listedProcess = (ListedProcess)row.Item;
      
-            foreach(Process process1 in Processes)
+            foreach(Process process in Processes)
             {
-                if (process1.Id.Equals(ls.id))
+                if (process.Id.Equals(listedProcess.id))
                 {
                     try
                     {
-                        printCpuUsage(process1);
-                        printRunTime(process1);
-                        printMemoryUsage(process1);
-                        printStartTime(process1);
+                        ShowCpuUsage(process);
+                        ShowRunTime(process);
+                        ShowMemoryUsage(process);
+                        ShowStartTime(process);
                         processThreads = new HashSet<ProcessThread>();
-                        sendThreads(process1);
+                        sendThreads(process);
                     }
                     catch (Exception)
                     {
@@ -81,19 +81,19 @@ namespace c_sharp_process_note
                 processThreads.Add(processThread);
             }
         }
-        private void printCpuUsage(Process process1)
+        private void ShowCpuUsage(Process process1)
         {
             Process_name_label.Content = process1.ProcessName;
         }
-        private void printRunTime(Process process1)
+        private void ShowRunTime(Process process1)
         {
             Run_time_label.Content = process1.TotalProcessorTime;
         }
-        private void printMemoryUsage(Process process1)
+        private void ShowMemoryUsage(Process process1)
         {
             Memory_usage_label.Content = process1.PeakWorkingSet64/2048 +" mb";
         }
-        private void printStartTime(Process process1)
+        private void ShowStartTime(Process process1)
         {
             
             Start_time_label.Content = process1.StartTime.ToString("f");
