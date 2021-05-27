@@ -121,7 +121,32 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Show Threeds" HorizontalAlignment="Left" Margin="50,139,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click"/>
+            <Button BorderBrush="{x:Null}"  Foreground="White" Margin="10,335,0,18" Content="Show Threads" Click="Button_Click" FontSize="18">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#707070"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7e88bf"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Label x:Name="Process_name_label" Content="" HorizontalAlignment="Left" Margin="38,85,0,0" VerticalAlignment="Top" Width="124" BorderBrush="Black" Height="67"/>
             <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="38,250,0,0" VerticalAlignment="Top" Width="124"/>
             <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="138"/>
@@ -131,7 +156,7 @@
                       Content="Window always on top"
                       IsChecked="False"
                       Checked="Window_On_Top_Activated" Unchecked="Window_On_Top_Deactivated"
-                      HorizontalAlignment="Left" Margin="88,344,0,18" Width="171" FontFamily="Tw Cen MT" FontSize="16"/>
+                      HorizontalAlignment="Left" Margin="88,314,0,49" Width="171" FontFamily="Tw Cen MT" FontSize="16"/>
         </Grid>
 
 
