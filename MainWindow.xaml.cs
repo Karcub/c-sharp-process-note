@@ -48,7 +48,7 @@ namespace c_sharp_process_note
             Process.Start("http://google.com/search?q=" + selectedProcess.Name);
         }
 
-        private void DataGridRow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void DataGridRow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseEventArgs e)
         {
             DataGridRow row = (DataGridRow)sender;
             ListedProcess ls = (ListedProcess)row.Item;
@@ -68,8 +68,8 @@ namespace c_sharp_process_note
                     }
                     catch (Exception)
                     {
-                        //MessageBox.Show("Current process is not running");
-                        continue;
+                        MessageBox.Show("Current process is not running");
+                        
                     } 
                 }
             }

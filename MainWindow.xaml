@@ -44,7 +44,7 @@
                 </DataGrid.Resources>
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseEnter" Handler="DataGridRow_MouseEnter"/>
+                        <EventSetter Event="MouseLeftButtonUp" Handler="DataGridRow_MouseLeftButtonUp"/>
                         <Setter Property="Background" Value="#707070"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
