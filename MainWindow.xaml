@@ -4,15 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="The best Process Note ever" Height="710" Width="830">
+        Title="The best Process Note ever" Height="690" Width="758.8"
+        Background="#DDDD" FontFamily="Tw Cen MT" Foreground="#FF9F9F9F"
+        >
 
-    <DockPanel HorizontalAlignment="Left" LastChildFill="False" Height="616" Margin="66,39,0,0" VerticalAlignment="Top" Width="680">
+    <DockPanel HorizontalAlignment="Left" LastChildFill="False" Height="616" Margin="66,39,0,0" VerticalAlignment="Top" Width="666">
 
         <Grid DockPanel.Dock="Bottom" Height="189" Margin="321,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="67*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ListView Name ="CommentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="330" Margin="10,23,0,0">
+            <ListView Name ="CommentsList" HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="655" Margin="-320,27,-157.4,0" SelectionChanged="CommentsList_SelectionChanged" FontSize="18" Background="#FF9D9D9D" Foreground="Black" Grid.RowSpan="5">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Comments on the process" Width="310"/>
@@ -21,32 +30,109 @@
             </ListView>
 
         </Grid>
-        <Grid DockPanel.Dock="Left" Width="321" Margin="0,0,0,-188.8">
-            <DataGrid Name="ProcessInfo" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="Select_Row" CanUserResizeColumns="False" Margin="0,0,0,10">
+        <Grid DockPanel.Dock="Left" Background="Black" Width="321" Margin="0,0,0,13.2" RenderTransformOrigin="0.475,0.705">
+            <DataGrid Name="ProcessInfo" Background="Black" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="Select_Row" CanUserResizeColumns="False" Margin="0,0,0,-29">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="180"/>
-                    <DataGridTextColumn Header="PID" Binding="{Binding id}"  Width="115"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
+                    <DataGridTextColumn Header="PID" Binding="{Binding id}" Width="115"/>
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="Black" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Height" Value="25" />
+                        <Setter Property="FontSize" Value="20" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseEnter" Handler="DataGridRow_MouseEnter"/>
+                        <Setter Property="Background" Value="#707070"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7e88bf"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True" >
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#616ba2" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#616ba2" />
+                        </Style.Resources>
                     </Style>
                 </DataGrid.ItemContainerStyle>
             </DataGrid>
 
         </Grid>
 
-        <Grid Margin="0,0,0,77.2" Width="338">
-            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="200,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Process name" HorizontalAlignment="Left" Height="25" Margin="50,10,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="200,200,0,0" VerticalAlignment="Top" Width="90"/>
-            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="50,200,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button Margin="10,400,170,-85" Content="Add comment" Click="Add_Comment"/>
-            <Button Margin="180,400,10,-85" Content="Search online" Click="Search"/>
+        <Grid Margin="0,0,0,42.2" Width="338">
+            <Label Content="Run Time" HorizontalAlignment="Left" Height="25" Margin="200,27,0,0" VerticalAlignment="Top" Width="128" FontSize="16"/>
+            <Label Content="Process name" HorizontalAlignment="Left" Height="25" Margin="27,27,0,0" VerticalAlignment="Top" Width="135" FontSize="16" BorderBrush="Black"/>
+            <Label Content="Start Time" HorizontalAlignment="Left" Height="25" Margin="200,196,0,0" VerticalAlignment="Top" Width="128" FontSize="16"/>
+            <Label Content="Memory Usage" HorizontalAlignment="Left" Height="25" Margin="27,196,0,0" VerticalAlignment="Top" Width="135" FontSize="16"/>
+            <Button BorderBrush="{x:Null}" Foreground="White" Margin="10,372,0,-18" Content="Add comment" Click="Add_Comment" FontSize="18">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#707070"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7e88bf"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button BorderBrush="{x:Null}"  Foreground="White" Margin="10,408,0,-55" Content="Search online" Click="Search" FontSize="18">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#707070"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7e88bf"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Label x:Name="Process_name_label" Content="" HorizontalAlignment="Left" Margin="66,57,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="58,243,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="158,243,0,0" VerticalAlignment="Top" Width="180"/>
+            <Label x:Name="Memory_usage_label" Content="" HorizontalAlignment="Left" Margin="38,226,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Start_time_label" Content="" HorizontalAlignment="Left" Margin="192,226,0,0" VerticalAlignment="Top" Width="146"/>
             <Label x:Name="Run_time_label" Content="" HorizontalAlignment="Left" Margin="200,57,0,0" VerticalAlignment="Top"/>
+
+            <CheckBox Name="TopMost"
+                      Content="Window always on top"
+                      IsChecked="False"
+                      Checked="Window_On_Top_Activated" Unchecked="Window_On_Top_Deactivated"
+                      HorizontalAlignment="Left" Margin="88,344,0,18" Width="171" FontFamily="Tw Cen MT" FontSize="16"/>
         </Grid>
 
 

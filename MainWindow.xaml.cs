@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using ProcessNote;
 
 namespace c_sharp_process_note
@@ -11,11 +13,12 @@ namespace c_sharp_process_note
     public partial class MainWindow
     {
         public readonly List<ListedProcess> ListedProcesses = new List<ListedProcess>();
-        public Process[] processes = Process.GetProcesses();
+        public readonly Process[] Processes = Process.GetProcesses();
 
         public MainWindow()
         {
             InitializeComponent();
+            FontFamily = new FontFamily("Lucida Console");
             Process[] processes = Process.GetProcesses();
             foreach (Process item in processes)
             {
@@ -26,41 +29,22 @@ namespace c_sharp_process_note
         
         private void Select_Row(object sender, SelectionChangedEventArgs e)
         {
-            if (sender != null)
-            {
-                DataGrid grid = sender as DataGrid;
-                Refresh_Select();
-            }
-        }
-        
-        private void Refresh_Select()
-        {
-            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
-            {
-                DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess selectedProcess = dgr.Item as ListedProcess;
-                
-                CommentsList.ItemsSource = selectedProcess.Comments;
-            }
+            DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
+            ListedProcess selectedProcess = dgr.Item as ListedProcess;
+            CommentsList.ItemsSource = selectedProcess.Comments;
         }
 
         private void Add_Comment(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
-            {
-                var commentsDialog = new CommentsDialog();
-                commentsDialog.ShowDialog();
-            }
+            var commentsDialog = new CommentsDialog();
+            commentsDialog.ShowDialog();
         }
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems.Count == 1)
-            {
-                DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess selectedProcess = dgr.Item as ListedProcess;
-                Process.Start("http://google.com/search?q=" + selectedProcess.Name);
-            }
+            DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
+            ListedProcess selectedProcess = dgr.Item as ListedProcess;
+            Process.Start("http://google.com/search?q=" + selectedProcess.Name);
         }
 
         private void DataGridRow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -68,7 +52,7 @@ namespace c_sharp_process_note
             DataGridRow row = (DataGridRow)sender;
             ListedProcess ls = (ListedProcess)row.Item;
      
-            foreach(Process process1 in processes)
+            foreach(Process process1 in Processes)
             {
                 if (process1.Id.Equals(ls.id))
                 {
@@ -104,6 +88,28 @@ namespace c_sharp_process_note
         {
             
             Start_time_label.Content = process1.StartTime.ToString("f");
+        }
+        
+        private void Window_On_Top_Deactivated(object sender, EventArgs e)
+        {
+            var mainWindow = Application.Current.Windows
+                .Cast<Window>()
+                .FirstOrDefault(window => window is MainWindow) as MainWindow;
+            mainWindow.Topmost = false;
+        }
+        
+        private void Window_On_Top_Activated(object sender, EventArgs e)
+        {
+            var mainWindow = Application.Current.Windows
+                .Cast<Window>()
+                .FirstOrDefault(window => window is MainWindow) as MainWindow;
+            mainWindow.Topmost = true;
+            
+        }
+
+        private void CommentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 
