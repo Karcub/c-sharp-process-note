@@ -1,0 +1,14 @@
+﻿<Window x:Class="ProcessNote.CommentsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Add comment" Height="350" Width="460">
+    <Grid>
+        <TextBox Name ="CommentsBox" HorizontalAlignment="Left" Margin="32,76,0,0" TextWrapping="Wrap" Text="Type comment here" VerticalAlignment="Top" Height="130" Width="400"/>
+        <Button Content="SAVE" HorizontalAlignment="Left" Height="30" Margin="50,230,0,0" VerticalAlignment="Top" Width="106" Click="Save"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Height="30" Margin="280,230,0,0" VerticalAlignment="Top" Width="106" Click="Cancel_Click"/>
+        <Label Content="COMMENT" HorizontalAlignment="Left" Height="35" Margin="180,36,0,0" VerticalAlignment="Top" Width="206"/>
+    </Grid>
+</Window>
