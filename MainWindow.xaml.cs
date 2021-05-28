@@ -50,8 +50,8 @@ namespace c_sharp_process_note
 
         private void DataGridRow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            DataGridRow row = (DataGridRow)sender;
-            ListedProcess listedProcess = (ListedProcess)row.Item;
+            DataGridRow row =sender as DataGridRow;
+            ListedProcess listedProcess = row.Item as ListedProcess;
      
             foreach(Process process in Processes)
             {
