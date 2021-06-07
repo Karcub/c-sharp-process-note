@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using ProcessNote;
 
 namespace c_sharp_process_note
@@ -10,12 +13,13 @@ namespace c_sharp_process_note
     public partial class MainWindow
     {
         public readonly List<ListedProcess> ListedProcesses = new List<ListedProcess>();
-        public Process[] processes = Process.GetProcesses();
+        public readonly Process[] Processes = Process.GetProcesses();
         public HashSet<ProcessThread> processThreads = new HashSet<ProcessThread>();
 
         public MainWindow()
         {
             InitializeComponent();
+            FontFamily = new FontFamily("Lucida Console");
             Process[] processes = Process.GetProcesses();
             foreach (Process item in processes)
             {
@@ -26,65 +30,46 @@ namespace c_sharp_process_note
         
         private void Select_Row(object sender, SelectionChangedEventArgs e)
         {
-            if (sender != null)
-            {
-                DataGrid grid = sender as DataGrid;
-                Refresh_Select();
-            }
-        }
-        
-        private void Refresh_Select()
-        {
-            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
-            {
-                DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess selectedProcess = dgr.Item as ListedProcess;
-                
-                CommentsList.ItemsSource = selectedProcess.Comments;
-            }
+            DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
+            ListedProcess selectedProcess = dgr.Item as ListedProcess;
+            CommentsList.ItemsSource = selectedProcess.Comments;
         }
 
         private void Add_Comment(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems != null && ProcessInfo.SelectedItems.Count == 1)
-            {
-                var commentsDialog = new CommentsDialog();
-                commentsDialog.ShowDialog();
-            }
+            var commentsDialog = new CommentsDialog();
+            commentsDialog.ShowDialog();
         }
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            if (ProcessInfo.SelectedItems.Count == 1)
-            {
-                DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
-                ListedProcess selectedProcess = dgr.Item as ListedProcess;
-                Process.Start("http://google.com/search?q=" + selectedProcess.Name);
-            }
+            DataGridRow dgr = ProcessInfo.ItemContainerGenerator.ContainerFromItem(ProcessInfo.SelectedItem) as DataGridRow;
+            ListedProcess selectedProcess = dgr.Item as ListedProcess;
+            Process.Start("http://google.com/search?q=" + selectedProcess.Name);
         }
 
-        private void DataGridRow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void DataGridRow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            DataGridRow row = (DataGridRow)sender;
-            ListedProcess ls = (ListedProcess)row.Item;
+            DataGridRow row =sender as DataGridRow;
+            ListedProcess listedProcess = row.Item as ListedProcess;
      
-            foreach(Process process1 in processes)
+            foreach(Process process in Processes)
             {
-                if (process1.Id.Equals(ls.id))
+                if (process.Id.Equals(listedProcess.id))
                 {
                     try
                     {
-                        printCpuUsage(process1);
-                        printRunTime(process1);
-                        printMemoryUsage(process1);
-                        printStartTime(process1);
+                        ShowCpuUsage(process);
+                        ShowRunTime(process);
+                        ShowMemoryUsage(process);
+                        ShowStartTime(process);
                         processThreads = new HashSet<ProcessThread>();
-                        sendThreads(process1);
+                        sendThreads(process);
                     }
                     catch (Exception)
                     {
-                        //MessageBox.Show("Current process is not running");
-                        continue;
+                        MessageBox.Show("Current process is not running");
+                        
                     } 
                 }
             }
@@ -96,22 +81,44 @@ namespace c_sharp_process_note
                 processThreads.Add(processThread);
             }
         }
-        private void printCpuUsage(Process process1)
+        private void ShowCpuUsage(Process process1)
         {
             Process_name_label.Content = process1.ProcessName;
         }
-        private void printRunTime(Process process1)
+        private void ShowRunTime(Process process1)
         {
             Run_time_label.Content = process1.TotalProcessorTime;
         }
-        private void printMemoryUsage(Process process1)
+        private void ShowMemoryUsage(Process process1)
         {
             Memory_usage_label.Content = process1.PeakWorkingSet64/2048 +" mb";
         }
-        private void printStartTime(Process process1)
+        private void ShowStartTime(Process process1)
         {
             
             Start_time_label.Content = process1.StartTime.ToString("f");
+        }
+        
+        private void Window_On_Top_Deactivated(object sender, EventArgs e)
+        {
+            var mainWindow = Application.Current.Windows
+                .Cast<Window>()
+                .FirstOrDefault(window => window is MainWindow) as MainWindow;
+            mainWindow.Topmost = false;
+        }
+        
+        private void Window_On_Top_Activated(object sender, EventArgs e)
+        {
+            var mainWindow = Application.Current.Windows
+                .Cast<Window>()
+                .FirstOrDefault(window => window is MainWindow) as MainWindow;
+            mainWindow.Topmost = true;
+            
+        }
+
+        private void CommentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
